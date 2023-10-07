@@ -18,18 +18,16 @@ app.post('/denuncia', async (request, reply) => {
         longitude: z.number(),
         imagem: z.string(),
         textoDenuncia: z.string(),
-        data: z.date(),
     })
 
-    const{ latitude, longitude, imagem, textoDenuncia, data} = createDenunciaSchema.parse(request.body)
+    const{ latitude, longitude, imagem, textoDenuncia} = createDenunciaSchema.parse(request.body)
 
     await prisma.denuncia.create({
         data:{
             latitude, 
             longitude, 
             imagem, 
-            textoDenuncia, 
-            data
+            textoDenuncia
         }
     })
     return reply.status(201).send()
