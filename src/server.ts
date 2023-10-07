@@ -34,6 +34,14 @@ app.post('/denuncia', async (request, reply) => {
 })
 
 
+app.delete("/denuncia/:id", async (req: Request, res: Response) =>{
+    const { id } = req.params;
+    const denuncia = await prisma.denuncia.delete({
+        where: { id: id },
+    });
+})
+
+
 app.listen({ 
     host: '0.0.0.0',
     port: process.env.PORT ? Number(process.env.PORT):3333,
