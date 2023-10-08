@@ -6,6 +6,14 @@ const app = fastify()
 
 const prisma = new PrismaClient()
 
+// Configurar opções CORS
+app.register(require('fastify-cors'), {
+  origin: 'https://suapemas.netlify.app', // Substitua pelo seu site real
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+})
+
 app.get('/denuncia', async () => {
     const denuncia = await prisma.denuncia.findMany()
 
@@ -31,14 +39,6 @@ app.post('/denuncia', async (request, reply) => {
         }
     })
     return reply.status(201).send()
-})
-
-
-app.delete("/denuncia/:id", async (req: Request, res: Response) =>{
-    const { id } = req.params;
-    const denuncia = await prisma.denuncia.delete({
-        where: { id: id },
-    });
 })
 
 
