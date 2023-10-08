@@ -6,12 +6,12 @@ const app = fastify()
 
 const prisma = new PrismaClient()
 
-// Configurar opções CORS
+// Configuração do acesso CORS
 app.register(require('fastify-cors'), {
-  origin: 'https://suapemas.netlify.app', // Substitua pelo seu site real
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204,
+    origin: ['http://localhost:5501', 'https://suapemas.netlify.app'], // Substitua PORTA pela sua porta local
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
 })
 
 app.get('/denuncia', async () => {
